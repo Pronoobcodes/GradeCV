@@ -1,6 +1,6 @@
 from datetime import datetime
 import uuid
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 class CVBase(BaseModel):
     original_filename: str
@@ -17,8 +17,7 @@ class CVResponse(CVBase):
     user_id: uuid.UUID
     upload_date: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class CVResponseWithText(CVResponse):
     extracted_text: str

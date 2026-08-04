@@ -1,13 +1,12 @@
 from datetime import datetime
 import uuid
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from typing import Optional
 
 class UserBase(BaseModel):
     email: EmailStr
     full_name: str
-    is_active: Optional[bool] = True
-    is_superuser: bool = False
+
 
 class UserCreate(UserBase):
     password: str
@@ -19,8 +18,9 @@ class UserUpdate(BaseModel):
 
 class UserResponse(UserBase):
     id: uuid.UUID
+    is_active: Optional[bool] = True
+    is_superuser: bool = False
     created_at: datetime
     updated_at: datetime
     
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
