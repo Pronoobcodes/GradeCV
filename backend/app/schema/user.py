@@ -21,7 +21,6 @@ class UserCreate(BaseModel):
     @field_validator("password")
     @classmethod
     def prevent_placeholder_password(cls, v: str) -> str:
-        # Check for exact match or case-insensitive variation
         if v.strip() == "[PASSWORD]":
             raise ValueError(
                 "You cannot use the placeholder '[PASSWORD]' as your actual password."
@@ -37,17 +36,20 @@ class UserRead(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = {
+        "from_attributes": True
+    }
 
 
 class UserProfileUpdate(BaseModel):
     full_name: Optional[str] = None
+    email: Optional[EmailStr] = None  
 
     model_config = {
         "json_schema_extra": {
             "example": {
                 "full_name": "Jane Doe",
+                "email": "janedoe@example.com"
             }
         }
     }
@@ -65,5 +67,3 @@ class PasswordResetConfirm(BaseModel):
 class PasswordChange(BaseModel):
     current_password: str
     new_password: str = Field(..., min_length=8)
-
-    
