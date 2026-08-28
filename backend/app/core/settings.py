@@ -12,9 +12,12 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    RESET_TOKEN_EXPIRY_MINUTES: int = 40
+    VERIFY_TOKEN_EXPIRY_MINUTES: int = 15
 
-    LLM_API_KEY: str = ""
+    LLM_API_KEY: str
     LLM_PROVIDER: str = "groq"
+    LLM_MODEL: str = "llama-3.3-70b-versatile"
 
     CORS_ORIGINS: list[str] = ["http://localhost:3000"]
 
