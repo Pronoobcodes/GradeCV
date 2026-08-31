@@ -97,7 +97,7 @@ backend/
 
 - The visual design (colors, fonts, spacing, component shapes) wasn't hand-picked — it was **derived from a folder of reference images** provided to the AI, which extracted a palette and typography (Playfair Display for headings, Plus Jakarta Sans for UI text) and turned it into a `DESIGN.md` + Tailwind theme before any component was built.
 - Every page (landing, auth, grading form, history) and every reusable component (`Button`, `Card`, `FileUpload`, `ScoreGauge`, `Badge`, etc.) was generated step-by-step from a structured prompt, reviewed stage by stage rather than all at once.
-- Because of this, if you're extending the frontend, it's worth **re-using the same prompt-driven approach** (see `/prompts` if included, or the project notes) rather than hand-rolling new styles that might drift from the existing design system in `DESIGN.md`.
+- Because of this, if you're extending the frontend, it's worth **re-using the same prompt-driven approach** rather than hand-rolling new styles that might drift from the existing design system in `DESIGN.md`.
 - A few issues that came up during AI-driven generation and had to be explicitly fixed afterward: layout/alignment bugs in generated sections, a hydration warning caused by a browser extension injecting attributes into `<body>` (fixed with `suppressHydrationWarning`), and a file-upload bug in the Next.js API proxy route that silently broke CV submissions. These are the kinds of issues to watch for if you regenerate or extend sections with AI — always test the actual network request, not just the UI rendering.
 
 ---
