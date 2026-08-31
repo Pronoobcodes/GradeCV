@@ -8,7 +8,7 @@ from app.services import grade_cv_against_job
 
 router = APIRouter(prefix="/grading", tags=["grading"])
 
-@router.post("/", response_model=GradingResultRead, status_code=201)
+@router.post("", response_model=GradingResultRead, status_code=201)
 def create_grading(
     payload: GradingResultCreate,
     current_user: User = Depends(get_current_active_user),
@@ -40,7 +40,7 @@ def create_grading(
     session.refresh(grading)
     return grading
 
-@router.get("/", response_model=list[GradingResultRead])
+@router.get("", response_model=list[GradingResultRead])
 def list_gradings(
     current_user: User = Depends(get_current_active_user),
     session: Session = Depends(get_session),

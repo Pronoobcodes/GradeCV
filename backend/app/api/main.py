@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from app.api.router import auth, cvs, grading, job_descriptions, users
 from app.core.middleware import setup_middleware
 
-app = FastAPI(title="CV Grader")
+app = FastAPI(title="CV Grader", redirect_slashes=False)
 
 setup_middleware(app)
 

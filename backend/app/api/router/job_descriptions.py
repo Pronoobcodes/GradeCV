@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends
 from sqlmodel import Session, select
 from app.api.deps import get_current_active_user, get_session
 from app.models import JobDescription, User
-from app.schema.job_description import JobDescriptionCreate, JobDescriptionRead
+from app.schema.job_description import JobDescriptionCreate, JobDescriptionRead, JobDescriptionReadDetail
 
 router = APIRouter(prefix="/job-descriptions", tags=["job-descriptions"])
 
-@router.post("/", response_model=JobDescriptionRead, status_code=201)
+@router.post("", response_model=JobDescriptionReadDetail, status_code=201)
 def create_job_description(
     payload: JobDescriptionCreate,
     current_user: User = Depends(get_current_active_user),
@@ -18,7 +18,7 @@ def create_job_description(
     session.refresh(jd)
     return jd
 
-@router.get("/", response_model=list[JobDescriptionRead])
+@router.get("", response_model=list[JobDescriptionRead])
 def list_job_descriptions(
     current_user: User = Depends(get_current_active_user),
     session: Session = Depends(get_session),

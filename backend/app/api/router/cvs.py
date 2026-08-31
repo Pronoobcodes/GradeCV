@@ -10,7 +10,7 @@ from app.services.cv_parsing_service import extract_text_from_pdf
 router = APIRouter(prefix="/cvs", tags=["cvs"])
 
 
-@router.post("/", response_model=CVReadDetail, status_code=201)
+@router.post("", response_model=CVReadDetail, status_code=201)
 async def create_cv(
     file: UploadFile = File(...),
     current_user: User = Depends(get_current_active_user),
@@ -30,7 +30,7 @@ async def create_cv(
     return cv
 
 
-@router.get("/", response_model=list[CVRead])
+@router.get("", response_model=list[CVRead])
 def read_cvs(
     current_user: User = Depends(get_current_active_user),
     session: Session = Depends(get_session),
